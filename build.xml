@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+<project name="applettest" default="package">
+    
+  <path id="class.path">
+    <pathelement location="lib/plugin.jar"/>
+  </path>
+      
+  <target name="compile">
+    <mkdir dir="bin" />
+    <javac srcdir="src"
+           destdir="bin"
+           classpathref="class.path"
+           debug="off"
+           optimize="on"
+           nowarn="on">
+    </javac>
+  </target>
+
+  <target name="clean">
+    <delete dir="bin" />
+    <delete file="applettest.jar" />
+  </target>
+  
+  <target name="package" depends="compile">
+    <jar destfile="applettest.jar">
+      <fileset dir="bin">
+        <include name="**/*.class" />
+      </fileset>
+    </jar>
+  </target>
+
+</project>

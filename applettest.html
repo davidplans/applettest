@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Applet Test</title>
+    <script type="text/javascript">
+    
+    /**
+     * Called by the Java applet when user clicks the "apply" button or
+     * when the applet just started. The current text of the Java applet 
+     * is passed as parameter to this function.
+     */
+    function textChanged(text)
+    {
+        document.getElementById("text").value = text;
+    }
+    
+    /**
+     * Returns the applet or throws an exception when not found.
+     */
+    function getApplet()
+    {
+        var e = document.getElementById("testapplet");
+        if (!e) throw new Error("No applet found");
+        return e;
+    }
+    
+    /**
+     * Sends the text in the form field to the java applet.
+     */
+    function sendToJava()
+    {
+       getApplet().setText(document.getElementById("text").value);
+    }
+    
+    /**
+     * Pulls the text from the java applet and writes it to the form field.
+     */
+    function pullFromJava()
+    {
+        document.getElementById("text").value = getApplet().getText();
+    }
+    
+    </script>
+  </head>
+  <body>
+    <h1>Applet Test</h1>
+
+    <h2>HTML/JavaScript part</h2>
+    <p>
+      <label for="text">Text:</label><input type="text" id="text" value="" />
+      <button onclick="sendToJava()">Send to Java</button>
+      <button onclick="pullFromJava()">Pull from Java</button>
+    </p>
+      
+    <h2>Java part</h2>
+    <object id="testapplet" classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
+            width="256" height="256"
+            codebase="http://java.sun.com/update/1.6.0/jinstall-6u30-windows-i586.cab#Version=1,6,0,0"
+            onReadyStateChange="appletLoaded">
+      <param name="archive" value="applettest.jar" />
+      <param name="code" value="com.github.kayahr.applettest.AppletTest" />
+      <param name="text" value="Initial text (By object tag parameter)" />
+      <script type="text/javascript">document.getElementById("testapplet").id = null</script>
+      <embed id="testapplet"
+             type="application/x-java-applet;version=1.6"
+             width="256" height="256" 
+             archive="applettest.jar"
+             code="com.github.kayahr.applettest.AppletTest" 
+             pluginspage="http://javadl.sun.com/webapps/download/GetFile/1.6.0_30-b12/windows-i586/xpiinstall.exe"
+             text="Initial text (By embed tag attribute)">
+        <noembed>
+          No Java support.
+        </noembed>
+      </embed>
+    </object>
+    
+  </body>
+</html>
