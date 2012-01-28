@@ -21,8 +21,8 @@
     function getApplet()
     {
         var e = document.getElementById("testapplet");
-        if (!e) throw new Error("No applet found");
-        return e;
+        /*@cc_on return e @*/
+        return e.getElementsByTagName("embed")[0];
     }
     
     /**
@@ -56,14 +56,11 @@
     <h2>Java part</h2>
     <object id="testapplet" classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
             width="256" height="256"
-            codebase="http://java.sun.com/update/1.6.0/jinstall-6u30-windows-i586.cab#Version=1,6,0,0"
-            onReadyStateChange="appletLoaded">
+            codebase="http://java.sun.com/update/1.6.0/jinstall-6u30-windows-i586.cab#Version=1,6,0,0">
       <param name="archive" value="applettest.jar" />
       <param name="code" value="com.github.kayahr.applettest.AppletTest" />
       <param name="text" value="Initial text (By object tag parameter)" />
-      <script type="text/javascript">document.getElementById("testapplet").id = null</script>
-      <embed id="testapplet"
-             type="application/x-java-applet;version=1.6"
+      <embed type="application/x-java-applet;version=1.6"
              width="256" height="256" 
              archive="applettest.jar"
              code="com.github.kayahr.applettest.AppletTest" 
