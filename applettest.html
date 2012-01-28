@@ -20,9 +20,8 @@
      */
     function getApplet()
     {
-        var e = document.getElementById("testapplet");
-        /*@cc_on return e @*/
-        return e.getElementsByTagName("embed")[0];
+        /*@cc_on return document.getElementById("testapplet-object") @*/
+        return document.getElementById("testapplet-embed");
     }
     
     /**
@@ -54,22 +53,20 @@
     </p>
       
     <h2>Java part</h2>
-    <object id="testapplet" classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
+    <object id="testapplet-object"
+            classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
             width="256" height="256"
             codebase="http://java.sun.com/update/1.6.0/jinstall-6u30-windows-i586.cab#Version=1,6,0,0">
       <param name="archive" value="applettest.jar" />
       <param name="code" value="com.github.kayahr.applettest.AppletTest" />
       <param name="text" value="Initial text (By object tag parameter)" />
-      <embed type="application/x-java-applet;version=1.6"
+      <embed id="testapplet-embed"
+             type="application/x-java-applet;version=1.6"
              width="256" height="256" 
              archive="applettest.jar"
              code="com.github.kayahr.applettest.AppletTest" 
-             pluginspage="http://javadl.sun.com/webapps/download/GetFile/1.6.0_30-b12/windows-i586/xpiinstall.exe"
-             text="Initial text (By embed tag attribute)">
-        <noembed>
-          No Java support.
-        </noembed>
-      </embed>
+             pluginspage="http://java.com/download/"
+             text="Initial text (By embed tag attribute)" />
     </object>
     
   </body>
